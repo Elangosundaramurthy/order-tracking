@@ -1,0 +1,63 @@
+router.post('/signup', authController.signup.bind(authController));
+router.post('/login', authController.login.bind(authController));
+router.post('/orders', authController.createOrder);
+router.get('/orders', authController.getAllOrders);
+router.post('/order/status', authController.getOrderStatus);
+---------------------------------------------------------------------------------------------------
+the mongo db connection :'mongodb://localhost:27017/login'
+there are two collections :orders
+                          :users
+----------------------------------------------------------------------------------------------------
+POST method  ->http://localhost:3005/signup
+{
+    "firstName": "elango",
+    "lastName": "s",
+    "email": "es7741140@example.com",
+    "password": "123456789",
+    "confirmPassword": "123456789"
+}
+//Automated customer_id will be created
+//saves JSON in the users collection
+-----------------------------------------------------------------------------------------------------
+POST method  ->http://localhost:3005/login
+{
+"email": "es7741140@example.com",
+"password": "123456789"
+}
+//Add on to the login customer_id will be checked with the both users and the orders collection if they are equal then the order status shows after login 
+-----------------------------------------------------------------------------------------------------
+POST method  -> http://localhost:3005/orders
+{
+  "order_id": "ORD123456",
+  "customer_id": "841",
+  "order_date":"2024-04-06T00:00:00.000Z"
+  "product_details": "Laptop, Model: XYZ123",
+  "batch_no": "BATCH001",
+  "quantity": 1,
+  "stock_availability": "Available",
+  "unavailable_quantity": 0,
+  "damaged_product": false,
+  "eta_unavailable_stock": "",
+  "eta_damaged_stock": "",
+  "order_total": 1200,
+  "payment_received": true,
+  "order_status": "Processing",
+  "sales_person": "Alice Smith",
+  "delivery_date": {
+    "$date": "2024-04-12T00:00:00.000Z"
+  }
+// this need to be manually need to be enterd in the POST method
+------------------------------------------------------------------------------------------------------
+GET method  -> http://localhost:3005/orders
+
+//this shows the orders details which is been there 
+
+-----------------------------------------------------------------------------------------------------
+POST method  ->http://localhost:3005/order/status
+
+{
+"email": "es7741140@example.com"
+}
+ 
+// if the email is been enterd then it shows the order_status
+-----------------------------------------------------------------------------------------------------
